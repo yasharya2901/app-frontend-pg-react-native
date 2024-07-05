@@ -52,3 +52,36 @@ We welcome contributions to the PG Application Frontend. To contribute, please f
 - [NativeWind](https://www.nativewind.dev/)
 
 For further assistance or inquiries, please feel free to reach out. Thank you for contributing to the PG Application Frontend!
+
+# Additional NativeWind/TailWind Setup
+
+To ensure seamless integration and functionality of NativeWind/TailWind classes in your React Native components, follow the steps below to update your VSCode configuration. This setup is essential for ensuring that the props in your components styled with NativeWind/TailWind work as expected.
+
+## Step-by-Step Guide
+
+1. **Open VSCode Settings**:
+   - Press `Ctrl + ,` to open the settings in VSCode.
+
+2. **Search for Tailwind Settings**:
+   - In the settings search bar, type `tailwind`.
+
+3. **Edit Tailwind CSS Experimental Config File**:
+   - Locate the setting `Tailwind CSS › Experimental: Config File`.
+   - Click on `Edit in settings.json`.
+
+4. **Update `settings.json`**:
+   - Add the following JSON object to your `settings.json` file:
+     ```json
+     "tailwindCSS.classAttributes": [
+       "class",
+       "className",
+       "ngClass",
+       "class:list",
+       ".*Styles*"
+     ]
+     ```
+
+5. **Naming Convention for Props**:
+   - Ensure that all props of custom components requiring NativeWind/TailWind classes end with `Styles`. For example, use `buttonStyles`, `textStyles`, etc.
+
+By following these steps, you will ensure that NativeWind/TailWind classes work correctly with the props in your React Native components. This setup will improve your development experience in VSCode and help maintain consistency in your project.
