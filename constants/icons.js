@@ -5,6 +5,8 @@ import manage from "../assets/icons/png/manage.png"
 import menu from "../assets/icons/png/menu.png"
 import notification from "../assets/icons/png/notification.png"
 import scan_camera from '../assets/icons/png/scan_camera.png'
+import eye from '../assets/icons/png/eye.png'
+import eyeHide from '../assets/icons/png/eye-hide.png'
 
 export default {
     account,
@@ -13,5 +15,7 @@ export default {
     manage,
     menu,
     notification,
-    scan_camera
+    scan_camera,
+    eye,
+    eyeHide
 };
