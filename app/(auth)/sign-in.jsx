@@ -1,8 +1,10 @@
-import { View, Text, TouchableOpacity, Animated } from 'react-native'
+import { View, Text, TouchableOpacity, Animated, Alert } from 'react-native'
 import React, { useState, useRef } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import CustomButton from '../../components/CustomButton'
 import LoginField from '../../components/LoginField'
+import {Link, router} from 'expo-router';
+
 
 const SignIn = () => {
   const [usePassword, setUsePassword] = useState(true);
@@ -12,6 +14,14 @@ const SignIn = () => {
     otp:'',
     usePassword: usePassword
   })
+
+  const submit = async () => {
+    try {
+      router.replace('/home')
+    } catch (error) {
+      Alert.alert('Error', error.message)
+    }
+  }
 
   const opacity = useRef(new Animated.Value(1)).current;
 
@@ -66,7 +76,7 @@ const SignIn = () => {
                 <CustomButton buttonStyle="bg-secondary rounded-md mr-2" textStyle={`font-pbold text-base`} text='Reset Password' handlePress={()=>console.log("Reset Password")}/>
             </View>
             <View className="flex-1">
-                <CustomButton buttonStyle="bg-primary rounded-md ml-2" textStyle={`font-pbold text-base`} text='Sign In' handlePress={()=>console.log(form)}/>
+                <CustomButton buttonStyle="bg-primary rounded-md ml-2" textStyle={`font-pbold text-base`} text='Sign In' handlePress={submit}/>
             </View>
         </View>
       </View>
