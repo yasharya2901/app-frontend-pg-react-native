@@ -77,11 +77,11 @@ To ensure seamless integration and functionality of NativeWind/TailWind classes 
        "className",
        "ngClass",
        "class:list",
-       ".*Styles*"
+       ".*Style*"
      ]
      ```
 
 5. **Naming Convention for Props**:
-   - Ensure that all props of custom components requiring NativeWind/TailWind classes end with `Styles`. For example, use `buttonStyles`, `textStyles`, etc.
+   - Ensure that all props of custom components requiring NativeWind/TailWind classes end with `Style`. For example, use `buttonStyle`, `textStyle`, etc.
 
 By following these steps, you will ensure that NativeWind/TailWind classes work correctly with the props in your React Native components. This setup will improve your development experience in VSCode and help maintain consistency in your project.
