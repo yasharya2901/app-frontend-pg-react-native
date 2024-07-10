@@ -1,2 +1,3 @@
 import icons from "./icons"
-export {icons}
+import svgs from "./svgs"
+export {icons, svgs}
