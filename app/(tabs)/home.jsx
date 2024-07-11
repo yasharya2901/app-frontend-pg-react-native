@@ -1,20 +1,20 @@
-import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import MealCard from "../../components/MealCard/MealCard";
 import { svgs } from "../../constants";
 import RightArrow from "../../assets/icons/svg/rightArrow.svg";
+import weekMenu from "../../api/mockApi";
 
 const Home = () => {
   const name = "Aditya";
 
-  const data = [1, 2, 3]; // Example data array
-
-  const renderItem = ({ item }) => (
+  const renderItem = (mealType, startTime, endTime) => {
+    return (
     <View className="mb-[120px]">
-      <MealCard />
+      <MealCard mealType={mealType} startTime={startTime} endTime={endTime} />
     </View>
-  );
+  )};
 
   const ItemSeparator = () => <View />;
 
@@ -27,8 +27,10 @@ const Home = () => {
         <Text className="font-bold text-2xl ">{`Good Evening, ${name}!`}</Text>
       </View>
       <FlatList
-        data={data}
-        renderItem={renderItem}
+        data={weekMenu[0].meals}
+        renderItem={({item}) => {
+          return renderItem(item.name, item.startTime, item.endTime);
+        }}
         keyExtractor={(item, index) => index.toString()}
         horizontal
         showsHorizontalScrollIndicator={false}
