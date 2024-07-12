@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
 import {SplashScreen, Stack} from 'expo-router';
 import {useFonts} from 'expo-font';
+import { ScreenDimensionsProvider } from '../context/ScreenDimensionsContext';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -30,11 +31,13 @@ const RootLayout = () => {
     if (!fontsLoaded && !error) return null;
 
     return (
-        <Stack>
-            <Stack.Screen name="index" options={{headerShown: false}} />
-            {/* <Stack.Screen name="(auth)" options={{headerShown: false}} /> */}
-            <Stack.Screen name="(tabs)" options={{headerShown: false}} />
-        </Stack>
+        <ScreenDimensionsProvider>
+            <Stack>
+                <Stack.Screen name="index" options={{headerShown: false}} />
+                {/* <Stack.Screen name="(auth)" options={{headerShown: false}} /> */}
+                <Stack.Screen name="(tabs)" options={{headerShown: false}} />
+            </Stack>
+        </ScreenDimensionsProvider>
     )
 }
 
