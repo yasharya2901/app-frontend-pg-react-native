@@ -25,9 +25,9 @@ const DayMenu = ({ week, onToggle }) => {
           {meal.mealItems.map((mealItem, itemIndex) => (<>
             <View className="flex flex-row items-center mb-2">
               <View className="bg-secondary rounded-md h-9 w-9 flex items-center justify-center">
-                <Image key={`${itemIndex}-${week.day}-${mealItem}`} source={icons[mealItem.type === "non-veg" ? "non_veg" : mealItem.type]} className="m-1 w-6 h-6" resizeMode='contain' />
+                <Image key={`${itemIndex}-${index}-${week.day}-${mealItem.name}`} source={icons[mealItem.type === "non-veg" ? "non_veg" : mealItem.type]} className="m-1 w-6 h-6" resizeMode='contain' />
               </View>
-              <Text key={itemIndex} className="font-pmedium text-base ml-4">
+              <Text key={`${itemIndex}-${mealItem.name}-${index}`} className="font-pmedium text-base ml-4">
                 {mealItem.name}
               </Text>
             </View>
