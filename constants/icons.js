@@ -7,6 +7,9 @@ import notification from "../assets/icons/png/notification.png"
 import scan_camera from '../assets/icons/png/scan_camera.png'
 import eye from '../assets/icons/png/eye.png'
 import eyeHide from '../assets/icons/png/eye-hide.png'
+import common from '../assets/icons/png/common.png'
+import veg from '../assets/icons/png/veg.png'
+import non_veg from '../assets/icons/png/non-veg.png'
 
 export default {
     account,
@@ -17,5 +20,8 @@ export default {
     notification,
     scan_camera,
     eye,
-    eyeHide
+    eyeHide,
+    common,
+    veg,
+    non_veg
 };
