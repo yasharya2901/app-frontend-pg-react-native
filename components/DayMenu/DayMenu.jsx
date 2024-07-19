@@ -20,14 +20,14 @@ const DayMenu = ({ week, onToggle }) => {
         {week.day}
       </Text>
       {expanded && week.meals.map((meal, index) => (
-        <View key={index} className="mt-2">
+        <View key={meal.id} className="mt-2">
           <Text className="font-pbold text-base mt-3">{meal.name}</Text>
           {meal.mealItems.map((mealItem, itemIndex) => (<>
             <View className="flex flex-row items-center mb-2">
               <View className="bg-secondary rounded-md h-9 w-9 flex items-center justify-center">
-                <Image key={`${itemIndex}-${index}-${week.day}-${mealItem.name}`} source={icons[mealItem.type === "non-veg" ? "non_veg" : mealItem.type]} className="m-1 w-6 h-6" resizeMode='contain' />
+                <Image key={`${mealItem.type}`} source={icons[mealItem.type === "non-veg" ? "non_veg" : mealItem.type]} className="m-1 w-6 h-6" resizeMode='contain' />
               </View>
-              <Text key={`${itemIndex}-${mealItem.name}-${index}`} className="font-pmedium text-base ml-4">
+              <Text key={`${mealItem._id}`} className="font-pmedium text-base ml-4">
                 {mealItem.name}
               </Text>
             </View>
