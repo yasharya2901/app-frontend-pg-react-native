@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import MealCard from "../../components/MealCard/MealCard";
 import { svgs } from "../../constants";
 import RightArrow from "../../assets/icons/svg/rightArrow.svg";
-import { fetchData } from "../../api/menu/menu";
+import { getTodayMenu } from "../../api/menu/menu";
 
 const Home = () => {
   const name = "Aditya";
@@ -22,8 +22,8 @@ const Home = () => {
   useEffect(() => {
     const fetchMenu = async () => {
       try {
-        const response = await fetchData("menu/week");
-        setWeekMenu(response.weeklyMenu);
+        const response = await getTodayMenu();
+        setWeekMenu(response.menuToday[0]);
       } catch (error) {
         console.error(error);
       }
@@ -40,7 +40,7 @@ const Home = () => {
         <Text className="font-bold text-2xl ">{`Good Evening, ${name}!`}</Text>
       </View>
       <FlatList
-        data={weekMenu[0]?.meals}
+        data={weekMenu?.meals}
         renderItem={({item}) => {
           return renderItem(item.name, item.startTime, item.endTime);
         }}
