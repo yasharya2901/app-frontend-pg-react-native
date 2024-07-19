@@ -4,7 +4,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import MealCard from "../../components/MealCard/MealCard";
 import { svgs } from "../../constants";
 import RightArrow from "../../assets/icons/svg/rightArrow.svg";
-import weekMenu from "../../api/mockApi";
 
 const Home = () => {
   const name = "Aditya";
