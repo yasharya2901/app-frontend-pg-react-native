@@ -3,7 +3,7 @@ import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import DayMenu from '../../components/DayMenu';
 import CustomButton from '../../components/CustomButton'
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { fetchData } from '../../api/menu/menu';
+import {getThisWeeksMenu} from '../../api/menu/menu';
 
 const Menu = () => {
   const scrollViewRef = useRef();
@@ -13,7 +13,7 @@ const Menu = () => {
 
   const loadData = async () => {
     try {
-      const response = await fetchData('menu/week');
+      const response = await getThisWeeksMenu();
       setData(response.weeklyMenu);
       setError(null);
       
