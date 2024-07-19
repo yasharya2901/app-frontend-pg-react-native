@@ -1,14 +1,15 @@
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import MealCard from "../../components/MealCard/MealCard";
 import { svgs } from "../../constants";
 import RightArrow from "../../assets/icons/svg/rightArrow.svg";
-import weekMenu from "../../api/mockApi";
+import { fetchData } from "../../api/menu/menu";
 
 const Home = () => {
   const name = "Aditya";
 
+  const [weekMenu, setWeekMenu] = useState([]);
   const renderItem = (mealType, startTime, endTime) => {
     return (
     <View className="mb-[120px]">
@@ -17,6 +18,18 @@ const Home = () => {
   )};
 
   const ItemSeparator = () => <View />;
+
+  useEffect(() => {
+    const fetchMenu = async () => {
+      try {
+        const response = await fetchData("menu/week");
+        setWeekMenu(response.weeklyMenu);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchMenu();
+  }, []);
 
   return (
     <SafeAreaView className="flex flex-col p-4 h-full justify-between bg-white">
@@ -27,7 +40,7 @@ const Home = () => {
         <Text className="font-bold text-2xl ">{`Good Evening, ${name}!`}</Text>
       </View>
       <FlatList
-        data={weekMenu[0].meals}
+        data={weekMenu[0]?.meals}
         renderItem={({item}) => {
           return renderItem(item.name, item.startTime, item.endTime);
         }}
