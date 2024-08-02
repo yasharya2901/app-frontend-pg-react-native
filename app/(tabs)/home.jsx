@@ -12,8 +12,6 @@ const Home = () => {
 
   const [weekMenu, setWeekMenu] = useState([]);
   const renderItem = (mealType, startTime, endTime) => {
-    // The startTime is in DD-MM-YYYY HH:MM:SS format
-    // We need to extract the time from it and display it as HH:MM AM/PM format
     startTime = convertTimeStampToTime(startTime);
     endTime = convertTimeStampToTime(endTime);
     return (
