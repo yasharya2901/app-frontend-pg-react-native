@@ -5,7 +5,6 @@ import MealCard from "../../components/MealCard/MealCard";
 import { svgs } from "../../constants";
 import RightArrow from "../../assets/icons/svg/rightArrow.svg";
 import { getTodayMenu } from "../../api/menu/menu";
-import Carousel from "react-native-reanimated-carousel"
 
 const Home = () => {
   const name = "Aditya";
