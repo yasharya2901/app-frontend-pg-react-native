@@ -11,12 +11,29 @@ const Home = () => {
 
   const [weekMenu, setWeekMenu] = useState([]);
   const renderItem = (mealType, startTime, endTime) => {
+    startTime = convertTimeStampToTime(startTime);
+    endTime = convertTimeStampToTime(endTime);
     return (
     <View className="mb-[120px]">
       <MealCard mealType={mealType} startTime={startTime} endTime={endTime} />
     </View>
   )};
 
+  const convertTimeStampToTime = (timeStamp) => {
+    timeStamp = timeStamp.split(" ")[1].slice(0, 5);
+    timeStamp = timeStamp.split(":");
+    let amOrPm = "";
+    if (Number(timeStamp[0]) > 12) {
+      timeStamp[0] -= 12;
+      amOrPm = "PM";
+    } else if (Number(timeStamp[0]) === 12) {
+      amOrPm = "PM";
+    } else {
+      amOrPm = "AM";
+    }
+    timeStamp = `${timeStamp[0]}:${timeStamp[1]} ${amOrPm}`;
+    return timeStamp;
+  }
   const ItemSeparator = () => <View />;
 
   useEffect(() => {
