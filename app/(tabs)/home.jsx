@@ -1,15 +1,53 @@
-import { FlatList, Text, TouchableOpacity, View } from "react-native";
+import { Dimensions, FlatList, Text, TouchableOpacity, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import MealCard from "../../components/MealCard/MealCard";
 import { svgs } from "../../constants";
 import RightArrow from "../../assets/icons/svg/rightArrow.svg";
 import { getTodayMenu } from "../../api/menu/menu";
+import Carousel from "react-native-reanimated-carousel";
 
 const Home = () => {
   const name = "Aditya";
-
+  const [width, setWidth] = useState(Dimensions.get("window").width);
+  const [defaultIndex, setDefaultIndex] = useState(0); // default index of meal card carousel
+  
   const [weekMenu, setWeekMenu] = useState([]);
+
+  const getDefaultIndex = (weekMenu) => {
+    
+    const meals = weekMenu?.meals;
+    const currentTime = new Date().getTime();
+    // convert current time to 24 hour format
+    const currentHour = new Date(currentTime).getHours();
+    const currentMinute = new Date(currentTime).getMinutes();
+    
+    let defaultIndex = 0;
+
+    if (!meals) {
+      return defaultIndex;
+    }
+
+    for (let i = 0; i < meals.length; i++) {
+      const meal = meals[i];
+      const mealStartTime = meal.startTime;
+      const mealEndTime = meal.endTime;
+      const mealStartHour = Number(mealStartTime.split(" ")[1].split(":")[0]);
+      const mealStartMinute = Number(mealStartTime.split(" ")[1].split(":")[1]);
+      const mealEndHour = Number(mealEndTime.split(" ")[1].split(":")[0]);
+      const mealEndMinute = Number(mealEndTime.split(" ")[1].split(":")[1]);
+      if (currentHour < mealStartHour && currentHour > mealEndHour) {
+        defaultIndex = i;
+        break;
+      } else if (currentHour === mealStartHour) {
+        if (currentMinute <= mealStartMinute && currentMinute >= mealEndMinute) {
+          defaultIndex = i;
+          break;
+        }
+      }
+    }
+    return defaultIndex;
+  }
   const renderItem = (mealType, startTime, endTime) => {
     startTime = convertTimeStampToTime(startTime);
     endTime = convertTimeStampToTime(endTime);
@@ -41,6 +79,7 @@ const Home = () => {
       try {
         const response = await getTodayMenu();
         setWeekMenu(response.menuToday[0]);
+        setDefaultIndex(getDefaultIndex(response.menuToday[0]));
       } catch (error) {
         console.error(error);
       }
@@ -56,7 +95,7 @@ const Home = () => {
       <View className="mb-10">
         <Text className="font-bold text-2xl ">{`Good Evening, ${name}!`}</Text>
       </View>
-      <FlatList
+      {/* <FlatList
         data={weekMenu?.meals}
         renderItem={({item}) => {
           return renderItem(item.name, item.startTime, item.endTime);
@@ -66,7 +105,14 @@ const Home = () => {
         showsHorizontalScrollIndicator={false}
         pagingEnabled
         ItemSeparatorComponent={ItemSeparator}
-      />
+      /> */}
+      {(weekMenu.meals) ? (<Carousel
+        width={width - 32}
+        autoPlay={false}
+        data={weekMenu?.meals}
+        defaultIndex={defaultIndex}
+        renderItem={({item}) => (renderItem(item.name, item.startTime, item.endTime))}
+      />): (<Text className="text-center">No meals for today</Text>)}
       <View>
         <View className="flex items-end">
           <TouchableOpacity className="h-14 w-[338px] bg-primary flex items-center justify-center rounded-xl pl-[5px] pr-[5px]" activeOpacity={0.7}>
