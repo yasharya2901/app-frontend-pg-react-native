@@ -10,11 +10,11 @@ const ManageButton = ({
 }) => {
   return (
     <TouchableOpacity
-      className={`${buttonStyle} p-2 flex`}
+      className={`${buttonStyle} p-2 mt-2 mb-2 flex flex-row justify-between items-center`}
       onPress={handlePress}
       activeOpacity={0.7}
     >
-      <Text className={`text-center ${textStyle}`}>{text}</Text>
+      <Text className={`${textStyle} text-lg font-pmedium`}>{text}</Text>
       <RightArrow width={24} height={24} />
     </TouchableOpacity>
   );
