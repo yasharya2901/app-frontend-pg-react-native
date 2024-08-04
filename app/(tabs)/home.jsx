@@ -6,13 +6,16 @@ import { svgs } from "../../constants";
 import RightArrow from "../../assets/icons/svg/rightArrow.svg";
 import { getTodayMenu } from "../../api/menu/menu";
 import Carousel from "react-native-reanimated-carousel";
+import CustomButton from "../../components/CustomButton";
 
 const Home = () => {
   const name = "Aditya";
   const [width, setWidth] = useState(Dimensions.get("window").width);
   const [defaultIndex, setDefaultIndex] = useState(0); // default index of meal card carousel
   
+  
   const [weekMenu, setWeekMenu] = useState([]);
+  const [error, setError] = useState(null);
 
   const getDefaultIndex = (weekMenu) => {
     
@@ -36,7 +39,10 @@ const Home = () => {
       const mealStartMinute = Number(mealStartTime.split(" ")[1].split(":")[1]);
       const mealEndHour = Number(mealEndTime.split(" ")[1].split(":")[0]);
       const mealEndMinute = Number(mealEndTime.split(" ")[1].split(":")[1]);
-      if (currentHour < mealStartHour && currentHour > mealEndHour) {
+      if (currentHour < mealStartHour && currentHour < mealEndHour) {
+        defaultIndex = i;
+        break;
+      } else if(currentHour >= mealStartHour && currentHour <= mealEndHour) {
         defaultIndex = i;
         break;
       } else if (currentHour === mealStartHour) {
@@ -49,8 +55,6 @@ const Home = () => {
     return defaultIndex;
   }
   const renderItem = (mealType, startTime, endTime) => {
-    startTime = convertTimeStampToTime(startTime);
-    endTime = convertTimeStampToTime(endTime);
     return (
     <View className="mb-[120px]">
       <MealCard mealType={mealType} startTime={startTime} endTime={endTime} />
@@ -80,12 +84,26 @@ const Home = () => {
         const response = await getTodayMenu();
         setWeekMenu(response.menuToday[0]);
         setDefaultIndex(getDefaultIndex(response.menuToday[0]));
+        setError(null);
       } catch (error) {
+        setError(error);
         console.error(error);
       }
     };
     fetchMenu();
   }, []);
+
+  const handleRetry = async () => {
+    try {
+      const response = await getTodayMenu();
+      setWeekMenu(response.menuToday[0]);
+      setDefaultIndex(getDefaultIndex(response.menuToday[0]));
+      setError(null);
+    } catch (error) {
+      setError(error);
+      console.error(error);
+    }
+  }
 
   return (
     <SafeAreaView className="flex flex-col p-4 h-full justify-between bg-white">
@@ -112,7 +130,10 @@ const Home = () => {
         data={weekMenu?.meals}
         defaultIndex={defaultIndex}
         renderItem={({item}) => (renderItem(item.name, item.startTime, item.endTime))}
-      />): (<Text className="text-center">No meals for today</Text>)}
+      />): (error) ? (<View className={`h-full flex items-center justify-center`}>
+        <Text className={`font-pbold text-lg rounded-lg shadow-2xl`}>Oops! Something Went Wrong...</Text>
+        <CustomButton text="Retry" handlePress={handleRetry} textStyle={``}/>
+      </View>) : (<Text className="font-pregular text-center mb-[500px]">No meals for today</Text>)}
       <View>
         <View className="flex items-end">
           <TouchableOpacity className="h-14 w-[338px] bg-primary flex items-center justify-center rounded-xl pl-[5px] pr-[5px]" activeOpacity={0.7}>
