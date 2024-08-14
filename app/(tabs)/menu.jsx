@@ -44,7 +44,7 @@ const Menu = () => {
           ref={scrollViewRef}
           className={`flex`}
           >
-          {data ? data.map((week, index) => (
+          {data.length > 0 ? data.map((week, index) => (
             <DayMenu key={index} week={week} onToggle={handleToggle} />
           )) : <Text className={`font-pbold text-lg rounded-lg shadow-2xl`}>Nothing seems to be for this week</Text>}
         </ScrollView>) : 
