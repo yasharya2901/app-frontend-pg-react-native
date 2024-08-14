@@ -124,7 +124,7 @@ const Home = () => {
         pagingEnabled
         ItemSeparatorComponent={ItemSeparator}
       /> */}
-      {(weekMenu.meals) ? (<Carousel
+      {(weekMenu?.meals) ? (<Carousel
         width={width - 32}
         autoPlay={false}
         data={weekMenu?.meals}
