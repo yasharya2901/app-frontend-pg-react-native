@@ -4,6 +4,7 @@ import {useFonts} from 'expo-font';
 import { ScreenDimensionsProvider } from '../context/ScreenDimensionsContext';
 import { Provider } from 'react-redux';
 import store from '../redux/store'
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -34,14 +35,16 @@ const RootLayout = () => {
 
     return (
         <ScreenDimensionsProvider>
-            <Provider store={store}>
-                <Stack>
-                    <Stack.Screen name="index" options={{headerShown: false}} />
-                    {/* <Stack.Screen name="(auth)" options={{headerShown: false}} /> */}
-                    <Stack.Screen name="(pages)" options={{headerShown: false}} />
-                    <Stack.Screen name="(tabs)" options={{headerShown: false}} />
-                </Stack>
-            </Provider>
+            <GestureHandlerRootView>
+                <Provider store={store}>
+                    <Stack>
+                        <Stack.Screen name="index" options={{headerShown: false}} />
+                        {/* <Stack.Screen name="(auth)" options={{headerShown: false}} /> */}
+                        <Stack.Screen name="(pages)" options={{headerShown: false}} />
+                        <Stack.Screen name="(tabs)" options={{headerShown: false}} />
+                    </Stack>
+                </Provider>
+            </GestureHandlerRootView>
         </ScreenDimensionsProvider>
     )
 }
