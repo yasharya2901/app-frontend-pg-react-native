@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react';
 import CustomButton from '../CustomButton';
 import TimeBox from '../TimeBox';
 import { images } from '../../constants';
+import { router } from 'expo-router';
 
-const MealCard = ({ mealType, startTime, endTime }) => {
+const MealCard = ({ mealId, mealType, startTime, endTime }) => {
     const [hour, setHour] = useState(0);
     const [minute, setMinute] = useState(0);
     const [second, setSecond] = useState(0);
@@ -91,6 +92,11 @@ const MealCard = ({ mealType, startTime, endTime }) => {
         
 
     }
+
+    const scanMeal = (mealId, mealType) => {
+        router.push("/(pages)/camera-scan")
+        return
+    }
     
     return (
         <View>
@@ -103,10 +109,12 @@ const MealCard = ({ mealType, startTime, endTime }) => {
                     <Text className="font-pregular">{`${convertTimeStampToTime(startTime)} - ${convertTimeStampToTime(endTime)}`}</Text>
                     <CustomButton
                         buttonStyle={`${(isTimeForMeal()) ? "bg-primary" : "bg-disabled"} rounded-2xl text-base w-32`}
-                        handlePress={() => { console.log('Button Pressed') }}
+                        handlePress={() => { 
+                            return scanMeal(mealId, mealType)
+                         }}
                         textStyle={``}
                         text={`Scan Me`}
-                        disabled={!isTimeForMeal()}
+                        disabled={false}
                     />
                 </View>
             </View>
