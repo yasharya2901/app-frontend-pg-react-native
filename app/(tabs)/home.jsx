@@ -54,10 +54,10 @@ const Home = () => {
     }
     return defaultIndex;
   }
-  const renderItem = (mealType, startTime, endTime) => {
+  const renderItem = (id, mealType, startTime, endTime) => {
     return (
     <View className="mb-[120px]">
-      <MealCard mealType={mealType} startTime={startTime} endTime={endTime} />
+      <MealCard mealId={id} mealType={mealType} startTime={startTime} endTime={endTime} />
     </View>
   )};
 
@@ -129,7 +129,7 @@ const Home = () => {
         autoPlay={false}
         data={weekMenu?.meals}
         defaultIndex={defaultIndex}
-        renderItem={({item}) => (renderItem(item.name, item.startTime, item.endTime))}
+        renderItem={({item}) => (renderItem(weekMenu?.id, item.name, item.startTime, item.endTime))}
       />): (error) ? (<View className={`h-full flex items-center justify-center`}>
         <Text className={`font-pbold text-lg rounded-lg shadow-2xl`}>Oops! Something Went Wrong...</Text>
         <CustomButton text="Retry" handlePress={handleRetry} textStyle={``}/>

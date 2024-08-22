@@ -73,7 +73,7 @@ const SignIn = () => {
       <View className={`h-14`}>
         <View className="flex flex-row">
             <View className="flex-1">
-                <CustomButton buttonStyle="bg-secondary rounded-md mr-2" textStyle={`font-pbold text-base`} text='Reset Password' handlePress={()=>console.log("Reset Password")}/>
+                <CustomButton buttonStyle="bg-secondary rounded-md mr-2" textStyle={`font-pbold text-base`} text='Reset Password' handlePress={()=>{}}/>
             </View>
             <View className="flex-1">
                 <CustomButton buttonStyle="bg-primary rounded-md ml-2" textStyle={`font-pbold text-base`} text='Sign In' handlePress={submit}/>

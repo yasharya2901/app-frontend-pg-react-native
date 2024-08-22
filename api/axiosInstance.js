@@ -3,7 +3,7 @@ import { API_URL } from '@env';
 
 const apiUrl = API_URL;
 
-console.log('apiUrl', apiUrl);
+// console.log('apiUrl', apiUrl);
 
 const axiosInstance = axios.create({
   baseURL: apiUrl,

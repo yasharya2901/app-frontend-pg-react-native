@@ -54,8 +54,8 @@ const CreateUsers = () => {
                 });
             }
         } catch (error) {
-            console.error(error);
-            console.log(JSON.stringify(userData));
+            // console.error(error);
+            // console.log(JSON.stringify(userData));
             Alert.alert("Error creating user!");
         }
     };
