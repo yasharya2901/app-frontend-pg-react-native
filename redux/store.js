@@ -16,6 +16,23 @@ const initialState = {
     { label: 'Opt-in', value: 'opt-in' },
     { label: 'Opt-out', value: 'opt-out' },
   ],
+  userData: {
+      username: "",
+      phonenumber: "",
+      roomnumber: "",
+      address: {
+          addressLine1: "",
+          addressLine2: "",
+          city: "",
+          state: "",
+          pincode: "",
+          country: "India"
+      },
+      foodPreference: "",
+      usertype: "",
+      foodstatus: "",
+      password: "",
+  }
 };
 
 // Create a slice of the store for managing dropdown data
@@ -24,13 +41,13 @@ const dropdownSlice = createSlice({
   initialState,
   reducers: {
     setPreferencesItems: (state, action) => {
-      state.preferencesItems = action.payload;
+      state.userData.foodPreference = action.payload;
     },
     setUserType: (state, action) => {
-      state.userType = action.payload;
+      state.userData.usertype = action.payload;
     },
     setFoodStatus: (state, action) => {
-      state.foodStatus = action.payload;
+      state.userData.usertype = action.payload;
     },
   },
 });
