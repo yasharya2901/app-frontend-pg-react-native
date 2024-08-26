@@ -21,17 +21,16 @@ const SignIn = () => {
   const submit = async () => {
     if (usePassword) {
       try {
-        const response = await axiosInstance.post('/auth/login', {
+        const response = await axiosInstance.post('auth/login', {
           phoneNumber: form.mobile,
           password: form.password
         });
 
         const { token } = response.data;
-        console.log(token);
         await SecureStore.setItemAsync('auth_token', token);
         router.replace('/home');
       } catch (error) {
-        Alert.alert('Error', error.response?.data?.message || error.message);
+        Alert.alert('Error h', error.response?.data?.message || error.message);
       }
     } else {
       Alert.alert('Error', 'OTP login is not supported yet.');
